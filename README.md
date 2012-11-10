@@ -1,4 +1,7 @@
-= Usage
+# formatted-money
+
+## Usage
+
 Formatted float to cents:
 ```ruby
 require 'formatted-money'
