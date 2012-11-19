@@ -1,28 +1,30 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
+require 'rubygems/package_task'
 require 'rake'
 require 'rake/testtask'
 
-SPEC = Gem::Specification.new do |s|
+gemspec = Gem::Specification.new do |s|
   s.name = "formatted-money"
   s.version = '0.0.1'
   s.author = "Josef Strzibny"
   s.email = "strzibny@strzibny.name"
   s.homepage = "http://github.com/strzibny/formatted-money"
   s.platform = Gem::Platform::RUBY
-  s.summary = ""  
-  s.description = ""
-  s.require_path = "lib"
-  s.files = [
-    'LICENSE',
-    'Rakefile',
-    'README.md',
-    'lib/**/*',
-    'test/*'
-  ]
+  s.summary = "A dead simple library for converting human-readable money inputs to Integer and back"
+  s.description = <<-EOF
+                    For all Rubyist that use Integer for storing money values as cents.
+                    This is a dead simple gem for converting money from user inputs to Integer values
+                    for storing and fast precise calculations (and back). Does everything you need
+                    and nothing else. Well tested.
+                  EOF
+  s.require_path = "lib" 
+  s.required_ruby_version = '>= 1.9.0'
+  s.files = FileList["LICENSE", "Rakefile", "README.md", "doc/**/*", "lib/**/*", "test/*"]
 end
 
+Gem::PackageTask.new gemspec do |p|
+
+end
+ 
 Rake::TestTask.new('test') do |t|
   t.libs << 'test'
   t.pattern = 'test/test_*.rb'
