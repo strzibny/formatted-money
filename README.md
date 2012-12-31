@@ -5,9 +5,10 @@ For all Rubyist that use Integer for storing money values as cents. This is a de
 ## Installation and Requirements
 
 Install the gem and require it:
-```ruby
+```
 $ gem install formatted-money
-
+```
+```ruby
 require 'formatted-money'
 ```
 formatted-money requires Ruby 1.9.2. Don't use it with 1.8.x, 1.9.x should work though.
@@ -26,7 +27,7 @@ European and American submodules are available:
 ```ruby
 FormattedMoney::European.cents('4.000,56')  => 400056 
 ```
-To change the defauls behaviour:
+To change the defaul behaviour:
 ```ruby
 FormattedMoney.delimiter = ' '
 FormattedMoney.cents_separator = FormattedMoney::American::CENTS_SEPARATOR
