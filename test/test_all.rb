@@ -5,8 +5,8 @@ require 'formatted_money'
 
 class TestFormattedMoney < Test::Unit::TestCase
 
+  # Defaults to European style
   def test_conversion_to_cents
-    # Defaults to European style
     assert_equal Integer(0), FormattedMoney.cents('0')
     assert_equal Integer(0), FormattedMoney.cents('0,00')
     assert_equal Integer(400056), FormattedMoney.cents('4.000,56')
@@ -33,8 +33,8 @@ class TestFormattedMoney < Test::Unit::TestCase
     assert_equal Integer(789999400056), FormattedMoney::American.cents('7,899,994,000.56')
   end
 
+  # Defaults to European style
   def test_formatted_amount
-    # Defaults to European style
     assert_equal '0,00', FormattedMoney.amount(Integer(0))
     assert_equal '0,00', FormattedMoney.amount(Integer(00))
     assert_equal '1.000,00', FormattedMoney.amount(Integer(100000))
@@ -44,8 +44,8 @@ class TestFormattedMoney < Test::Unit::TestCase
     assert_equal '26.897.200,00', FormattedMoney.amount(Integer(2689720000))
   end
 
+  # Strings containing only numbers should be fine as well
   def test_formatted_amount_from_string
-    # Strings containing only numbers should be fine as well
     assert_equal '0,00', FormattedMoney.amount(String('0'))
     assert_equal '0,00', FormattedMoney.amount(String('00'))
     assert_equal '138.555.200,00', FormattedMoney.amount('13855520000')
