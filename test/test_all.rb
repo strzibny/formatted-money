@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-require 'test-unit'
-require 'formatted_money'
+require 'minitest/autorun'
+require 'formatted-money'
 
-class TestFormattedMoney < Test::Unit::TestCase
+class TestFormattedMoney < Minitest::Test
 
   # Defaults to European style
   def test_conversion_to_cents
