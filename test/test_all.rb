@@ -4,44 +4,43 @@ require 'minitest/autorun'
 require 'formatted-money'
 
 class TestFormattedMoney < Minitest::Test
-
   # Defaults to European style
   def test_conversion_to_cents
     assert_equal Integer(0), FormattedMoney.cents('0')
     assert_equal Integer(0), FormattedMoney.cents('0,00')
-    assert_equal Integer(400056), FormattedMoney.cents('4.000,56')
-    assert_equal Integer(4200056), FormattedMoney.cents('42.000,56')
-    assert_equal Integer(139400056), FormattedMoney.cents('1.394.000,56')
-    assert_equal Integer(789999400056), FormattedMoney.cents('7.899.994.000,56')
+    assert_equal Integer(400_056), FormattedMoney.cents('4.000,56')
+    assert_equal Integer(4_200_056), FormattedMoney.cents('42.000,56')
+    assert_equal Integer(139_400_056), FormattedMoney.cents('1.394.000,56')
+    assert_equal Integer(789_999_400_056), FormattedMoney.cents('7.899.994.000,56')
   end
 
   def test_european_conversion_to_cents
     assert_equal Integer(0), FormattedMoney::European.cents('0')
     assert_equal Integer(0), FormattedMoney::European.cents('0,00')
-    assert_equal Integer(400056), FormattedMoney::European.cents('4.000,56')
-    assert_equal Integer(4200056), FormattedMoney::European.cents('42.000,56')
-    assert_equal Integer(139400056), FormattedMoney::European.cents('1.394.000,56')
-    assert_equal Integer(789999400056), FormattedMoney::European.cents('7.899.994.000,56')
+    assert_equal Integer(400_056), FormattedMoney::European.cents('4.000,56')
+    assert_equal Integer(4_200_056), FormattedMoney::European.cents('42.000,56')
+    assert_equal Integer(139_400_056), FormattedMoney::European.cents('1.394.000,56')
+    assert_equal Integer(789_999_400_056), FormattedMoney::European.cents('7.899.994.000,56')
   end
 
   def test_american_conversion_to_cents
     assert_equal Integer(0), FormattedMoney::American.cents('0')
     assert_equal Integer(0), FormattedMoney::American.cents('0.00')
-    assert_equal Integer(400056), FormattedMoney::American.cents('4,000.56')
-    assert_equal Integer(4200056), FormattedMoney::American.cents('42,000.56')
-    assert_equal Integer(139400056), FormattedMoney::American.cents('1,394,000.56')
-    assert_equal Integer(789999400056), FormattedMoney::American.cents('7,899,994,000.56')
+    assert_equal Integer(400_056), FormattedMoney::American.cents('4,000.56')
+    assert_equal Integer(4_200_056), FormattedMoney::American.cents('42,000.56')
+    assert_equal Integer(139_400_056), FormattedMoney::American.cents('1,394,000.56')
+    assert_equal Integer(789_999_400_056), FormattedMoney::American.cents('7,899,994,000.56')
   end
 
   # Defaults to European style
   def test_formatted_amount
     assert_equal '0,00', FormattedMoney.amount(Integer(0))
     assert_equal '0,00', FormattedMoney.amount(Integer(00))
-    assert_equal '1.000,00', FormattedMoney.amount(Integer(100000))
-    assert_equal '1.234,56', FormattedMoney.amount(Integer(123456))
-    assert_equal '138.200,00', FormattedMoney.amount(Integer(13820000))
-    assert_equal '138.555.200,00', FormattedMoney.amount(Integer(13855520000))
-    assert_equal '26.897.200,00', FormattedMoney.amount(Integer(2689720000))
+    assert_equal '1.000,00', FormattedMoney.amount(Integer(100_000))
+    assert_equal '1.234,56', FormattedMoney.amount(Integer(123_456))
+    assert_equal '138.200,00', FormattedMoney.amount(Integer(13_820_000))
+    assert_equal '138.555.200,00', FormattedMoney.amount(Integer(13_855_520_000))
+    assert_equal '26.897.200,00', FormattedMoney.amount(Integer(2_689_720_000))
   end
 
   # Strings containing only numbers should be fine as well
@@ -54,53 +53,53 @@ class TestFormattedMoney < Minitest::Test
   def test_europen_formatted_amount
     assert_equal '0,00', FormattedMoney::European.amount(Integer(0))
     assert_equal '0,00', FormattedMoney::European.amount(Integer(00))
-    assert_equal '1.000,00', FormattedMoney::European.amount(Integer(100000))
-    assert_equal '1.234,56', FormattedMoney::European.amount(Integer(123456))
-    assert_equal '138.200,00', FormattedMoney::European.amount(Integer(13820000))
-    assert_equal '138.555.200,00', FormattedMoney::European.amount(Integer(13855520000))
-    assert_equal '26.897.200,00', FormattedMoney::European.amount(Integer(2689720000))
+    assert_equal '1.000,00', FormattedMoney::European.amount(Integer(100_000))
+    assert_equal '1.234,56', FormattedMoney::European.amount(Integer(123_456))
+    assert_equal '138.200,00', FormattedMoney::European.amount(Integer(13_820_000))
+    assert_equal '138.555.200,00', FormattedMoney::European.amount(Integer(13_855_520_000))
+    assert_equal '26.897.200,00', FormattedMoney::European.amount(Integer(2_689_720_000))
   end
 
   def test_american_formatted_amount
     assert_equal '0.00', FormattedMoney::American.amount(Integer(0))
     assert_equal '0.00', FormattedMoney::American.amount(Integer(00))
-    assert_equal '1,000.00', FormattedMoney::American.amount(Integer(100000))
-    assert_equal '1,234.56', FormattedMoney::American.amount(Integer(123456))
-    assert_equal '138,200.00', FormattedMoney::American.amount(Integer(13820000))
-    assert_equal '138,555,200.00', FormattedMoney::American.amount(Integer(13855520000))
-    assert_equal '26,897,200.00', FormattedMoney::American.amount(Integer(2689720000))
+    assert_equal '1,000.00', FormattedMoney::American.amount(Integer(100_000))
+    assert_equal '1,234.56', FormattedMoney::American.amount(Integer(123_456))
+    assert_equal '138,200.00', FormattedMoney::American.amount(Integer(13_820_000))
+    assert_equal '138,555,200.00', FormattedMoney::American.amount(Integer(13_855_520_000))
+    assert_equal '26,897,200.00', FormattedMoney::American.amount(Integer(2_689_720_000))
   end
 
   def test_check_float
     FormattedMoney.check_float('123,254')
     FormattedMoney.check_float('3,254.456')
 
-	  assert_raises (ArgumentError) {
+    assert_raises (ArgumentError) do
       FormattedMoney.check_float('123254d')
-    }
-	end
+    end
+  end
 
-	def test_check_integer
-	  FormattedMoney.check_integer('123254')
-	  FormattedMoney.check_integer(123254)
+  def test_check_integer
+    FormattedMoney.check_integer('123254')
+    FormattedMoney.check_integer(123_254)
 
-	  assert_raises (ArgumentError) {
-       FormattedMoney.check_integer('123254d')
-    }
-	end
+    assert_raises (ArgumentError) do
+      FormattedMoney.check_integer('123254d')
+    end
+  end
 
   def test_number_with_delimiter
-    assert_equal '1.000.000', FormattedMoney.number_with_delimiter('1000000','.')
-    assert_equal '400|000', FormattedMoney.number_with_delimiter('400000','|')
-    assert_equal '21,000,000,156', FormattedMoney.number_with_delimiter('21000000156',',')
+    assert_equal '1.000.000', FormattedMoney.number_with_delimiter('1000000', '.')
+    assert_equal '400|000', FormattedMoney.number_with_delimiter('400000', '|')
+    assert_equal '21,000,000,156', FormattedMoney.number_with_delimiter('21000000156', ',')
 
-    assert_equal '1 000 000', FormattedMoney.number_with_delimiter('1000000',' ')
-    assert_equal '400 000', FormattedMoney.number_with_delimiter('400000',' ')
-    assert_equal '21 000 000 156', FormattedMoney.number_with_delimiter('21000000156',' ')
+    assert_equal '1 000 000', FormattedMoney.number_with_delimiter('1000000', ' ')
+    assert_equal '400 000', FormattedMoney.number_with_delimiter('400000', ' ')
+    assert_equal '21 000 000 156', FormattedMoney.number_with_delimiter('21000000156', ' ')
 
-    assert_equal '1.000.000', FormattedMoney.number_with_delimiter(1000000,'.')
-    assert_equal '400|000', FormattedMoney.number_with_delimiter(400000,'|')
-    assert_equal '21,000,000,156', FormattedMoney.number_with_delimiter(21000000156,',')
+    assert_equal '1.000.000', FormattedMoney.number_with_delimiter(1_000_000, '.')
+    assert_equal '400|000', FormattedMoney.number_with_delimiter(400_000, '|')
+    assert_equal '21,000,000,156', FormattedMoney.number_with_delimiter(21_000_000_156, ',')
   end
 
   def test_trim_leading_zeros
