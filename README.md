@@ -11,25 +11,26 @@ $ gem install formatted-money
 ```ruby
 require 'formatted-money'
 ```
-formatted-money requires Ruby 1.9.2. Don't use it with 1.8.x, 1.9.x should work though.
+formatted-money requires Ruby 1.9.3. Don't use it with 1.8.x, 1.9.x should work though.
+
 ## Usage
 
 Formatted float to cents:
 ```ruby
-FormattedMoney.cents('1.394.000,56') => 139400056 
+FormattedMoney.cents('1.394.000,56') => 139400056
 FormattedMoney.cents('7.899.994.000,56') => 789999400056
 ```
 Cents to formatted float:
 ```ruby
-FormattedMoney.amount(Integer(13820000)) => "138.200,00" 
+FormattedMoney.amount(Integer(13820000)) => "138.200,00"
 ```
 European and American submodules are available:
 ```ruby
-FormattedMoney::European.cents('4.000,56')  => 400056 
+FormattedMoney::European.cents('4.000,56')  => 400056
 ```
 To change the defaul behaviour:
 ```ruby
 FormattedMoney.delimiter = ' '
 FormattedMoney.cents_separator = FormattedMoney::American::CENTS_SEPARATOR
-FormattedMoney.amount(Integer(13820000)) => "138 200,00" 
+FormattedMoney.amount(Integer(13820000)) => "138 200,00"
 ```

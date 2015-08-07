@@ -16,15 +16,15 @@ gemspec = Gem::Specification.new do |s|
                     for storing and fast precise calculations (and back). Does everything you need
                     and nothing else. Well tested.
                   EOF
-  s.require_path = "lib" 
-  s.required_ruby_version = '>= 1.9.0'
+  s.require_path = "lib"
+  s.required_ruby_version = '>= 1.9.3'
   s.files = FileList["LICENSE", "Rakefile", "README.md", "doc/**/*", "lib/**/*", "test/*"]
 end
 
 Gem::PackageTask.new gemspec do |p|
 
 end
- 
+
 Rake::TestTask.new('test') do |t|
   t.libs << 'test'
   t.pattern = 'test/test_*.rb'
