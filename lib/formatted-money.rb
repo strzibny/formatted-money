@@ -12,7 +12,7 @@ module FormattedMoney
   module American
     DELIMITER = ','
     CENTS_SEPARATOR = '.'
-    
+
 	  def self.cents(amount, round = true)
       FormattedMoney.cents(amount, round, DELIMITER, CENTS_SEPARATOR)
   	end
@@ -158,9 +158,9 @@ module FormattedMoney
 
   def self.only_zeros?(number, delimiter, cents_separator)
     unless /^[0#{delimiter}#{cents_separator}]*$/.match(number)
-      return false;
+      return false
     end
 
-    return true;
+    return true
   end
 end
