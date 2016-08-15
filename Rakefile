@@ -4,7 +4,7 @@ require 'rake/testtask'
 
 gemspec = Gem::Specification.new do |s|
   s.name = 'formatted-money'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.author = 'Josef Strzibny'
   s.email = 'strzibny@strzibny.name'
   s.homepage = 'http://github.com/strzibny/formatted-money'
