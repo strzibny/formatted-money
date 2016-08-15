@@ -97,6 +97,12 @@ module FormattedMoney
     return add_zero_cents amount if amount.is_a? Integer
 
     check_float(amount)
+    if amount[0] == '-'
+      amount[0] = ''
+      negative = true
+    else
+      negative = false
+    end
 
     # No cents
     amount = amount.delete(delimiter)
@@ -115,7 +121,11 @@ module FormattedMoney
       return Integer(units + cents[0] + String(last_cent))
     end
 
-    Integer(units + cents)
+    if negative
+      Integer('-' + units + cents)
+    else
+      Integer(units + cents)
+    end
   end
 
   def self.add_zero_cents(n)
@@ -126,14 +136,14 @@ module FormattedMoney
   # numbers should contain only digits, commas or dots.
   # Only numbers like 1.000.000.000,2056 or 2,150.3 are accepted
   def self.check_float(n)
-    unless /^[\d\.\,]*$/.match(n.to_s)
-      throw NumberNotInFloatFormat, 'Float numbers can only be made out of digits, commas (,) or dots (.).'
+    unless /^(-){0,1}[\d\.\,]*$/.match(n.to_s)
+      throw NumberNotInFloatFormat, 'Float numbers can only be made out of digits, commas (,) or dots (.). Dash (-) is accepted at the beginning for negative numbers'
     end
   end
 
   def self.check_integer(n)
-    unless /^\d*$/.match(n.to_s)
-      throw NumberNotInIntegerFormat, 'Integer numbers can only be made out of digits.'
+    unless /^(-){0,1}\d*$/.match(n.to_s)
+      throw NumberNotInIntegerFormat, 'Integer numbers can only be made out of digits. Dash (-) is accepted at the beginning for negative numbers'
     end
   end
 

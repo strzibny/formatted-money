@@ -118,6 +118,9 @@ class TestFormattedMoney < Minitest::Test
     FormattedMoney.escape_chars = []
 
     assert_equal '.', FormattedMoney.separator_regex('.')
+
+    # Back to default
+    FormattedMoney.escape_chars = ['.', '^', '$', '*']
   end
 
   def test_only_zeros
@@ -133,5 +136,15 @@ class TestFormattedMoney < Minitest::Test
     assert_equal false, FormattedMoney.only_zeros?('01', delimiter, cents_separator)
     assert_equal false, FormattedMoney.only_zeros?('0|0', delimiter, cents_separator)
     assert_equal false, FormattedMoney.only_zeros?('000500', delimiter, cents_separator)
+  end
+
+  def test_negative_numbers
+    assert_equal '-1.000,00', FormattedMoney::European.amount(Integer(-100_000))
+    assert_equal '-1.234,56', FormattedMoney::European.amount(Integer(-123_456))
+    assert_equal '-138.200,00', FormattedMoney::European.amount(Integer(-13_820_000))
+    assert_equal '-138.555.200,00', FormattedMoney::European.amount(Integer(-13_855_520_000))
+    assert_equal '-26.897.200,00', FormattedMoney::European.amount(Integer(-2_689_720_000))
+    assert_equal Integer(-139_400_056), FormattedMoney::American.cents('-1,394,000.56')
+    assert_equal Integer(-789_999_400_056), FormattedMoney::American.cents('-7,899,994,000.56')
   end
 end
