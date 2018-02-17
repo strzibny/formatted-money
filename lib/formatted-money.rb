@@ -2,9 +2,83 @@ class FormattedMoney
   class NumberNotInFloatFormat < StandardError; end
   class NumberNotInIntegerFormat < StandardError; end
 
+  DOT_AS_DECIMAL_MARK   = { delimiter: ',', decimal_mark: '.' }.freeze
+  COMMA_AS_DECIMAL_MARK = { delimiter: '.', decimal_mark: ',' }.freeze
+
   STYLES = {
-    'us' => ['.', ','],
-    'czech' => [',', '.']
+    archentine: COMMA_AS_DECIMAL_MARK,
+    armenian: DOT_AS_DECIMAL_MARK,
+    arubanian: DOT_AS_DECIMAL_MARK,
+    australian: DOT_AS_DECIMAL_MARK,
+    austrian: COMMA_AS_DECIMAL_MARK,
+    bahamian: DOT_AS_DECIMAL_MARK,
+    batswanan: DOT_AS_DECIMAL_MARK,
+    bangladeshian: DOT_AS_DECIMAL_MARK,
+    belgian: COMMA_AS_DECIMAL_MARK,
+    belizean: DOT_AS_DECIMAL_MARK,
+    bermudian: DOT_AS_DECIMAL_MARK,
+    bolivian: DOT_AS_DECIMAL_MARK,
+    bosnian: DOT_AS_DECIMAL_MARK,
+    brazilian: COMMA_AS_DECIMAL_MARK,
+    british: DOT_AS_DECIMAL_MARK,
+    bruneian: DOT_AS_DECIMAL_MARK,
+    canadian: DOT_AS_DECIMAL_MARK,
+    cayman: DOT_AS_DECIMAL_MARK,
+    chinesian: DOT_AS_DECIMAL_MARK,
+    colombian: COMMA_AS_DECIMAL_MARK,
+    costarican: COMMA_AS_DECIMAL_MARK,
+    croatian: COMMA_AS_DECIMAL_MARK,
+    cuban: DOT_AS_DECIMAL_MARK,
+    cypriot: COMMA_AS_DECIMAL_MARK,
+    czech: COMMA_AS_DECIMAL_MARK,
+    danish: COMMA_AS_DECIMAL_MARK,
+    dutch: COMMA_AS_DECIMAL_MARK,
+    dominican: DOT_AS_DECIMAL_MARK,
+    egyptian: DOT_AS_DECIMAL_MARK,
+    filipino: DOT_AS_DECIMAL_MARK,
+    finnish: { delimiter: ' ', decimal_mark: ',' },
+    french: { delimiter: ' ', decimal_mark: ',' },
+    german: COMMA_AS_DECIMAL_MARK,
+    gibraltarian: DOT_AS_DECIMAL_MARK,
+    greek: COMMA_AS_DECIMAL_MARK,
+    ghanaian: DOT_AS_DECIMAL_MARK,
+    guatemalan: DOT_AS_DECIMAL_MARK,
+    hondurican: DOT_AS_DECIMAL_MARK,
+    hk: DOT_AS_DECIMAL_MARK,
+    indonesian: COMMA_AS_DECIMAL_MARK,
+    iranian: DOT_AS_DECIMAL_MARK,
+    irish: DOT_AS_DECIMAL_MARK,
+    israelian: DOT_AS_DECIMAL_MARK,
+    italian: COMMA_AS_DECIMAL_MARK,
+    jamaikan: DOT_AS_DECIMAL_MARK,
+    kenyan: DOT_AS_DECIMAL_MARK,
+    latvian: DOT_AS_DECIMAL_MARK,
+    luxembourgian: COMMA_AS_DECIMAL_MARK,
+    macedonian: DOT_AS_DECIMAL_MARK,
+    malaysian: DOT_AS_DECIMAL_MARK,
+    maltesian: DOT_AS_DECIMAL_MARK,
+    mozambican: COMMA_AS_DECIMAL_MARK,
+    mexican: DOT_AS_DECIMAL_MARK,
+    norwegian: COMMA_AS_DECIMAL_MARK,
+    nepalesian: DOT_AS_DECIMAL_MARK,
+    pakistani: DOT_AS_DECIMAL_MARK,
+    peruan: DOT_AS_DECIMAL_MARK,
+    portuguese: { delimiter: ' ', decimal_mark: ',' },
+    romanian: COMMA_AS_DECIMAL_MARK,
+    russian: COMMA_AS_DECIMAL_MARK,
+    uae: DOT_AS_DECIMAL_MARK,
+    uruguayan: COMMA_AS_DECIMAL_MARK,
+    us: DOT_AS_DECIMAL_MARK,
+    saudian: DOT_AS_DECIMAL_MARK,
+    singaporean: DOT_AS_DECIMAL_MARK,
+    spanish: COMMA_AS_DECIMAL_MARK,
+    slovenian: COMMA_AS_DECIMAL_MARK,
+    tanzanian: DOT_AS_DECIMAL_MARK,
+    turkish: DOT_AS_DECIMAL_MARK,
+    thai: DOT_AS_DECIMAL_MARK,
+    tongan: DOT_AS_DECIMAL_MARK,
+    venezuelan: COMMA_AS_DECIMAL_MARK,
+    zealandian: DOT_AS_DECIMAL_MARK
   }
 
   @@omit_cents = false
@@ -141,11 +215,11 @@ class FormattedMoney
   end
 
   def initialize(style:, omit_cents: @@omit_cents, round: @@round)
-    @style = style
-    @omit_cents = omit_cents
-    @round = round
-    @delimiter = STYLES[@style.to_s][0]
-    @cents_separator = STYLES[@style.to_s][1]
+    @style           = style
+    @omit_cents      = omit_cents
+    @round           = round
+    @delimiter       = STYLES[@style.to_sym][:delimiter]
+    @cents_separator = STYLES[@style.to_sym][:decimal_mark]
   end
 
   def amount(amount)
