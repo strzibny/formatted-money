@@ -1,46 +1,16 @@
-# encoding: utf-8
-
-# @title FormattedMoney
-# @license MIT
-# @author Josef Strzibny
-module FormattedMoney
+class FormattedMoney
   class NumberNotInFloatFormat < StandardError; end
   class NumberNotInIntegerFormat < StandardError; end
 
-  # American defaults
-  # comma for delimiter and dot for cents separator
-  module American
-    DELIMITER = ','
-    CENTS_SEPARATOR = '.'
-
-    def self.cents(amount, round = true)
-      FormattedMoney.cents(amount, round, DELIMITER, CENTS_SEPARATOR)
-    end
-
-    def self.amount(amount, omit_cents = false)
-      FormattedMoney.amount(amount, omit_cents, DELIMITER, CENTS_SEPARATOR)
-    end
-  end
-
-  # European defaults
-  # dot for delimiter and comma for cents separator
-  module European
-    DELIMITER = '.'
-    CENTS_SEPARATOR = ','
-
-    def self.cents(amount, round = true)
-      FormattedMoney.cents(amount, round, DELIMITER, CENTS_SEPARATOR)
-    end
-
-    def self.amount(amount, omit_cents = false)
-      FormattedMoney.amount(amount, omit_cents, DELIMITER, CENTS_SEPARATOR)
-    end
-  end
+  STYLES = {
+    'us' => ['.', ','],
+    'czech' => [',', '.']
+  }
 
   @@omit_cents = false
   @@round = true
-  @@delimiter = FormattedMoney::European::DELIMITER
-  @@cents_separator = FormattedMoney::European::CENTS_SEPARATOR
+  @@delimiter = '.'
+  @@cents_separator = ','
   @@escape_chars = ['.', '^', '$', '*']
 
   def self.escape_chars=(chars)
@@ -65,7 +35,7 @@ module FormattedMoney
 
   # Format Integer to float number with cents
   # @return [String] amount in human-readable format
-  def self.amount(amount, omit_cents = @@omit_cents, delimiter = @@delimiter, cents_separator = @@cents_separator)
+  def self.amount(amount, omit_cents: @@omit_cents, delimiter: @@delimiter, cents_separator: @@cents_separator)
     check_integer(amount) unless amount.is_a? Integer
 
     amount = amount.to_s
@@ -86,7 +56,7 @@ module FormattedMoney
 
   # Format the float-formatted input to Integer for saving or for calculation
   # @return [Integer] money as cents
-  def self.cents(amount, round = @@round, delimiter = @@delimiter, cents_separator = @@cents_separator)
+  def self.cents(amount, round: @@round, delimiter: @@delimiter, cents_separator: @@cents_separator)
     delimiter_regex = self.separator_regex(delimiter)
     cents_separator_regex = self.separator_regex(cents_separator)
 
@@ -168,5 +138,21 @@ module FormattedMoney
     return false unless /^[0#{delimiter}#{cents_separator}]*$/.match(number)
 
     true
+  end
+
+  def initialize(style:, omit_cents: @@omit_cents, round: @@round)
+    @style = style
+    @omit_cents = omit_cents
+    @round = round
+    @delimiter = STYLES[@style.to_s][0]
+    @cents_separator = STYLES[@style.to_s][1]
+  end
+
+  def amount(amount)
+    FormattedMoney.amount(amount, omit_cents: @omit_cents, delimiter: @delimiter, cents_separator: @cents_separator)
+  end
+
+  def cents(amount)
+    FormattedMoney.cents(amount, round: @round, delimiter: @delimiter, cents_separator: @cents_separator)
   end
 end

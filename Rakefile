@@ -4,7 +4,7 @@ require 'rake/testtask'
 
 gemspec = Gem::Specification.new do |s|
   s.name = 'formatted-money'
-  s.version = '0.0.2'
+  s.version = '1.0.dev'
   s.author = 'Josef Strzibny'
   s.email = 'strzibny@strzibny.name'
   s.homepage = 'http://github.com/strzibny/formatted-money'
@@ -17,7 +17,7 @@ gemspec = Gem::Specification.new do |s|
                     and nothing else. Well tested.
                   EOF
   s.require_path = 'lib'
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
   s.files = FileList['LICENSE', 'Rakefile', 'README.md', 'doc/**/*', 'lib/**/*', 'test/*']
 end
 
