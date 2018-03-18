@@ -16,7 +16,7 @@ FormattedMoney is built for Ruby 2.2.0 and higher.
 
 ## Object scope and limitations
 
-FormattedMoney provides a simple way to present stored Integer money values saved as cents and to a way to parse is back from user input.
+FormattedMoney provides a simple way to present stored Integer money values saved as cents and a way to parse it back from user input.
 
 Unfortunatelly support for custom number of *cents* nor Indian formatting is supported ATM.
 
