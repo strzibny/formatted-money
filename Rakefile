@@ -17,7 +17,7 @@ gemspec = Gem::Specification.new do |s|
                     and nothing else. Well tested.
                   EOF
   s.require_path = 'lib'
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.2.0'
   s.files = FileList['LICENSE', 'Rakefile', 'README.md', 'doc/**/*', 'lib/**/*', 'test/*']
 end
 

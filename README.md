@@ -1,4 +1,4 @@
-# formatted-money
+# FormattedMoney
 
 For all Rubyist that use Integer for storing money values as cents. This is a dead simple gem for converting money from user inputs to Integer values for storing and fast precise calculations (and back). Does everything you need and nothing else. Well tested.
 
@@ -11,13 +11,25 @@ $ gem install formatted-money
 ```ruby
 require 'formatted-money'
 ```
-formatted-money requires Ruby 1.9.3. Don't use it with 1.8.x, 1.9.x should work though.
 
-*Limitations:* this currently does not support custom number of *cents* nor Indian formatting.
+FormattedMoney is built for Ruby 2.2.0 and higher.
+
+## Object scope and limitations
+
+FormattedMoney provides a simple way to present stored Integer money values saved as cents and to a way to parse is back from user input.
+
+Unfortunatelly support for custom number of *cents* nor Indian formatting is supported ATM.
 
 ## Usage
 
 First you create a formatter depending on the country style you would like, then simply call either `amount` or `cents` methods.
+
+Available styles:
+
+```ruby
+> FormattedMoney::STYLES.keys
+=> [:archentine, :armenian, :arubanian, :australian, :austrian, :bahamian, :batswanan, :bangladeshian, :belgian, :belizean, :bermudian, :bolivian, :bosnian, :brazilian, :british, :bruneian, :canadian, :cayman, :chinesian, :colombian, :costarican, :croatian, :cuban, :cypriot, :czech, :danish, :dutch, :dominican, :egyptian, :filipino, :finnish, :french, :german, :gibraltarian, :greek, :ghanaian, :guatemalan, :hondurican, :hk, :indonesian, :iranian, :irish, :israelian, :italian, :jamaikan, :kenyan, :latvian, :luxembourgian, :macedonian, :malaysian, :maltesian, :mozambican, :mexican, :norwegian, :nepalesian, :pakistani, :peruan, :portuguese, :romanian, :russian, :uae, :uruguayan, :us, :saudian, :singaporean, :spanish, :slovenian, :tanzanian, :turkish, :thai, :tongan, :venezuelan, :zealandian]
+```
 
 ### Czech Koruna example
 
